@@ -16,6 +16,7 @@ export class App {
     if (this.task.trim() !== '') {
       this.tasks.push(this.task);
       this.task = '';
+      // this.tasks[0]="updated from code";
     }
   }
 
