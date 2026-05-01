@@ -1,12 +1,30 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  standalone: true,
+  imports: [FormsModule, CommonModule],
+  templateUrl: './app.html'
 })
 export class App {
-  protected readonly title = signal('todolist');
+  task = '';
+  tasks: string[] = [];
+
+  addTask() {
+    if (this.task.trim() !== '') {
+      this.tasks.push(this.task);
+      this.task = '';
+    }
+  }
+
+  deleteTask(i: number) {
+    this.tasks.splice(i, 1);
+  }
+
+  editTask(i: number) {
+    let updated = prompt('Edit task', this.tasks[i]);
+    if (updated) this.tasks[i] = updated;
+  }
 }
